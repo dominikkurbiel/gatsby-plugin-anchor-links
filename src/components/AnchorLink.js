@@ -12,6 +12,8 @@ AnchorLink.propTypes = {
   to: PropTypes.string.isRequired,
   title: PropTypes.string,
   className: PropTypes.string,
+  duration: PropTypes.number,
+  offset: PropTypes.number,
   stripHash: PropTypes.bool,
   gatsbyLinkProps: PropTypes.object,
   onAnchorLinkClick: PropTypes.func,
@@ -23,6 +25,8 @@ export function AnchorLink({
   title,
   children,
   className,
+  duration,
+  offset,
   stripHash = false,
   gatsbyLinkProps = {},
   onAnchorLinkClick,
@@ -34,7 +38,7 @@ export function AnchorLink({
      * Spread optional gatsbyLinkProps object in fist, so our specific props will override
      */
     to: stripHash ? stripHashedLocation(to) : to,
-    onClick: (e) => onClickHandler(to, e, onAnchorLinkClick),
+    onClick: (e) => onClickHandler(to, e, onAnchorLinkClick, { duration, offset }),
   };
 
   /**

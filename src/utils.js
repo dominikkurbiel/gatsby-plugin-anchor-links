@@ -18,7 +18,7 @@ export function scroller(target, offset = 0, duration = 1000) {
   });
 }
 
-export function handleLinkClick(to, e, onAnchorLinkClick) {
+export function handleLinkClick(to, e, onAnchorLinkClick, optionalOptions) {
   /**
    * Log warnings on click
    */
@@ -29,10 +29,11 @@ export function handleLinkClick(to, e, onAnchorLinkClick) {
     const [anchorPath, anchor] = to.split('#');
     if (window.location.pathname === withPrefix(anchorPath)) {
       e.preventDefault();
+      const { duration, offset } = optionalOptions;
       scroller(
         `#${anchor}`,
-        window.gatsby_scroll_offset,
-        window.gatsby_scroll_duration
+        offset || window.gatsby_scroll_offset,
+        duration || window.gatsby_scroll_duration
       );
     }
   }
@@ -40,7 +41,7 @@ export function handleLinkClick(to, e, onAnchorLinkClick) {
   if (onAnchorLinkClick) onAnchorLinkClick();
 }
 
-export function handleStrippedLinkClick(to, e, onAnchorLinkClick) {
+export function handleStrippedLinkClick(to, e, onAnchorLinkClick, optionalOptions) {
   /**
    * Log warnings on click
    */
@@ -58,10 +59,11 @@ export function handleStrippedLinkClick(to, e, onAnchorLinkClick) {
 
   if (isSamePage) {
     e.preventDefault();
+    const { duration, offset } = optionalOptions;
     scroller(
       `#${anchor}`,
-      window.gatsby_scroll_offset,
-      window.gatsby_scroll_duration
+      offset || window.gatsby_scroll_offset,
+      duration || window.gatsby_scroll_duration
     );
   }
 
